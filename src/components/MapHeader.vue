@@ -56,6 +56,16 @@
         </div>
       </div>
     </div>
+    <div class="combatant-counters" v-if="curRound !== 0">
+      <div class="counter bastion-counter">
+        <span class="counter-label">Bastion</span>
+        <span class="counter-value">{{ bastionCount }}</span>
+      </div>
+      <div class="counter pyre-counter">
+        <span class="counter-label">Pyre</span>
+        <span class="counter-value">{{ pyreCount }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -71,7 +81,8 @@ import {
   CURRENT_ZONE_FIGHT,
   NUMBER_OF_ROUNDS,
   CURRENT_ROUND,
-  OPT_SHOW_SUMMARIES
+  OPT_SHOW_SUMMARIES,
+  ALL_FIGHTERS_IN_ROUND
 } from "../state/getters"
 import {
   CHANGE_ROUND,
@@ -116,10 +127,17 @@ export default {
       maxRounds: NUMBER_OF_ROUNDS,
       curRound: CURRENT_ROUND,
       fight: CURRENT_ZONE_FIGHT,
-      showingSummaries: OPT_SHOW_SUMMARIES
+      showingSummaries: OPT_SHOW_SUMMARIES,
+      allFighters: ALL_FIGHTERS_IN_ROUND
     }),
     enableRosterButton: function() {
       return this.curRound !== 0
+    },
+    bastionCount: function() {
+      return this.allFighters(true).length
+    },
+    pyreCount: function() {
+      return this.allFighters(false).length
     }
   },
   mounted() {}
@@ -199,6 +217,42 @@ h1 {
   background-color: #3498db;
 }
 
+.combatant-counters {
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  margin-top: 0.4em;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.2em 0.7em;
+  border-radius: 0.3em;
+  font-family: "Suez One", serif;
+  font-size: 0.9em;
+}
+
+.bastion-counter {
+  background-color: rgba(30, 80, 140, 0.7);
+  border: 1px solid rgba(70, 130, 200, 0.8);
+}
+
+.pyre-counter {
+  background-color: rgba(140, 30, 30, 0.7);
+  border: 1px solid rgba(200, 70, 70, 0.8);
+}
+
+.counter-label {
+  opacity: 0.85;
+}
+
+.counter-value {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
 @media only screen and (max-width: 840px) {
   .desktop {
     display: none;
@@ -206,6 +260,15 @@ h1 {
 
   .wide_button {
     font-size: 0.6em;
+  }
+
+  .combatant-counters {
+    margin-top: 0.2em;
+  }
+
+  .counter {
+    font-size: 0.7em;
+    padding: 0.15em 0.5em;
   }
 }
 </style>
