@@ -59,6 +59,16 @@
 
         {{ backstory(fighter.id) }}
       </div>
+      <div class="detail_row roundScore">
+        <div class="scoreBoard">
+          <span class="scoreLabel bastionLabel">BASTION</span>
+          <span class="scoreValue bastionScore">{{ scores.bastion }}</span>
+          <span class="scoreSep">–</span>
+          <span class="scoreValue pyreScore">{{ scores.pyre }}</span>
+          <span class="scoreLabel pyreLabel">PYRE</span>
+        </div>
+        <div class="scoreCaption">Round {{ curRound }} Score</div>
+      </div>
     </div>
     <div class="main_deets desktop">
       <ProfilePic
@@ -90,7 +100,9 @@ import {
   SELECTING_GETTER,
   FIGHTER_GETTER,
   CURRENT_ZONE_CONTESTED,
-  FIGHTER_BACKSTORY
+  FIGHTER_BACKSTORY,
+  ROUND_SCORES,
+  CURRENT_ROUND
 } from "../../state/getters"
 import { buildTwitterLink, buildInstagramLink } from "../../common/links"
 import ProfilePic from "../elements/ProfilePic.vue"
@@ -149,12 +161,17 @@ export default {
         return require("../../assets/pics/pyre-standin.png")
       return require("../../assets/pics/bastion-standin.png")
     },
+    scores: function() {
+      return this.roundScores
+    },
     ...mapGetters({
       zoneFight: CURRENT_ZONE_FIGHT,
       selected: SELECTING_GETTER,
       fighterGet: FIGHTER_GETTER,
       contested: CURRENT_ZONE_CONTESTED,
-      backstory: FIGHTER_BACKSTORY
+      backstory: FIGHTER_BACKSTORY,
+      roundScores: ROUND_SCORES,
+      curRound: CURRENT_ROUND
     })
   },
   name: "FighterDetails"
@@ -190,6 +207,66 @@ export default {
 
 .mobile {
   display: none;
+}
+
+/* Round score styles */
+.roundScore {
+  margin-top: 0.6vh;
+  padding: 0.3em 0.4vw 0.4em;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.scoreBoard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  font-family: "Saira", sans-serif;
+  font-size: 1em;
+}
+
+.scoreLabel {
+  font-size: 0.65em;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+}
+
+.bastionLabel {
+  color: #7aa4e0;
+}
+
+.pyreLabel {
+  color: #e07a5f;
+}
+
+.scoreValue {
+  font-size: 1.3em;
+  font-weight: bold;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+.bastionScore {
+  color: #7aa4e0;
+}
+
+.pyreScore {
+  color: #e07a5f;
+}
+
+.scoreSep {
+  font-size: 1.1em;
+  opacity: 0.6;
+}
+
+.scoreCaption {
+  text-align: center;
+  font-size: 0.6em;
+  opacity: 0.6;
+  margin-top: 0.1em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 @media only screen and (max-width: 840px) {
@@ -231,6 +308,10 @@ export default {
     margin-right: 0;
     margin-left: 1.2em;
     /* padding-left: ; */
+  }
+
+  .scoreBoard {
+    font-size: 1.1em;
   }
 }
 

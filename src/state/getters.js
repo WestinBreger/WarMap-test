@@ -136,6 +136,18 @@ const getters = {
   showGraphics: state => {
     return state.showGraphics
   },
+  roundScores: state => {
+    const tiles = Object.values(state.roundData[state.curRound]).filter(
+      t => !("zones" in t)
+    )
+    var bastionWins = 0
+    var pyreWins = 0
+    tiles.forEach(tile => {
+      if (tile.outcome && tile.outcome.bastion === "win") bastionWins++
+      if (tile.outcome && tile.outcome.pyre === "win") pyreWins++
+    })
+    return { bastion: bastionWins, pyre: pyreWins }
+  },
   getAllFightersThisRoundForFaction: (state, getters) => isBastion => {
     var curRound = getters.round
     var correctFaction = isBastion ? "bastion" : "pyre"
@@ -200,6 +212,7 @@ const TILE_IS_CLASH = "tileIsClash"
 const TILE_IS_MINICLASH = "tileIsMiniClash"
 const FIGHTER_BACKSTORY = "fighterBackstory"
 const ALL_FIGHTERS_IN_ROUND = "getAllFightersThisRoundForFaction"
+const ROUND_SCORES = "roundScores"
 
 const OPT_SHOW_GRAPHICS = "showGraphics"
 const OPT_SHOW_ITEMS = "showItems"
@@ -236,5 +249,6 @@ export {
   OPT_SHOW_LABELS,
   ALL_FIGHTERS_IN_ROUND,
   OPT_SHOW_SUMMARIES,
-  TILE_IS_MINICLASH
+  TILE_IS_MINICLASH,
+  ROUND_SCORES
 }
