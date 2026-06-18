@@ -2,10 +2,11 @@
   "compilerOptions": {
     "target": "es2015",
     "module": "esnext",
+    "jsx": "react",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["components/*"]
+      "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.vue", "src/**/*.js"]
+  "include": ["src/**/*.vue", "src/**/*.js", "src/**/*.jsx"]
 }
