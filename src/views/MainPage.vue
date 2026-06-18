@@ -335,7 +335,6 @@ export default {
 .desktopHeader {
   position: fixed;
   width: 32vw;
-  height: 27vh;
 
   top: 0%;
   z-index: 300;
@@ -344,7 +343,8 @@ export default {
 }
 
 .centerControls {
-  height: 25vh;
+  height: auto;
+  min-height: 25vh;
   transform: translateX(-50%);
   left: 50%;
   padding: 0 0.9vw 0 0.9vw;
@@ -352,10 +352,12 @@ export default {
 
 .right.desktopHeader {
   right: 0%;
+  height: 27vh;
 }
 
 .left.desktopHeader {
   left: 0%;
+  height: 27vh;
 }
 
 .desktopFooter {
