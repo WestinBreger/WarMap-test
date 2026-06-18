@@ -56,6 +56,7 @@
         </div>
       </div>
     </div>
+    <ConflictScoreboard v-if="curRound !== 0" class="desktop scoreboard-below" />
   </div>
 </template>
 
@@ -66,6 +67,7 @@ import VueSlider from "vue-slider-component"
 import "./elements/customerSlider.css"
 
 import { ToggleButton } from "vue-js-toggle-button"
+import ConflictScoreboard from "./ConflictScoreboard.vue"
 
 import {
   CURRENT_ZONE_FIGHT,
@@ -90,7 +92,8 @@ export default {
   },
   components: {
     ToggleButton,
-    VueSlider
+    VueSlider,
+    ConflictScoreboard
   },
   methods: {
     setRound: function(value) {
@@ -135,6 +138,10 @@ h1 {
 
 .header {
   padding: 0 0.3vw 0 0.3vw;
+}
+
+.scoreboard-below {
+  margin-top: 0.3em;
 }
 
 .wide_button {
