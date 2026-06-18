@@ -19,6 +19,7 @@
             <div :class="['custom-step', { active }]"></div>
           </template>
         </vue-slider>
+        <RoundScoreboard />
       </div>
       <div class="control_group">
         <ToggleButton
@@ -67,6 +68,8 @@ import "./elements/customerSlider.css"
 
 import { ToggleButton } from "vue-js-toggle-button"
 
+import RoundScoreboard from "./RoundScoreboard.vue"
+
 import {
   CURRENT_ZONE_FIGHT,
   NUMBER_OF_ROUNDS,
@@ -90,7 +93,8 @@ export default {
   },
   components: {
     ToggleButton,
-    VueSlider
+    VueSlider,
+    RoundScoreboard
   },
   methods: {
     setRound: function(value) {

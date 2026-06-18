@@ -172,6 +172,22 @@ const getters = {
           tile: currRound[testIndex].location
         }
       })
+  },
+  roundTileCounts: state => {
+    var tiles = Object.values(state.roundData[state.curRound]).filter(
+      t => !("zones" in t)
+    )
+    var bastionHeld = tiles.filter(t => t.owner === "bastion").length
+    var pyreHeld = tiles.filter(t => t.owner === "pyre").length
+    var bastionTook = tiles.filter(
+      t => t.outcome && t.outcome.bastion === "win"
+    ).length
+    var pyreTook = tiles.filter(t => t.outcome && t.outcome.pyre === "win")
+      .length
+    return {
+      bastion: { held: bastionHeld, took: bastionTook },
+      pyre: { held: pyreHeld, took: pyreTook }
+    }
   }
 }
 
@@ -200,6 +216,7 @@ const TILE_IS_CLASH = "tileIsClash"
 const TILE_IS_MINICLASH = "tileIsMiniClash"
 const FIGHTER_BACKSTORY = "fighterBackstory"
 const ALL_FIGHTERS_IN_ROUND = "getAllFightersThisRoundForFaction"
+const ROUND_TILE_COUNTS = "roundTileCounts"
 
 const OPT_SHOW_GRAPHICS = "showGraphics"
 const OPT_SHOW_ITEMS = "showItems"
@@ -236,5 +253,6 @@ export {
   OPT_SHOW_LABELS,
   ALL_FIGHTERS_IN_ROUND,
   OPT_SHOW_SUMMARIES,
-  TILE_IS_MINICLASH
+  TILE_IS_MINICLASH,
+  ROUND_TILE_COUNTS
 }
