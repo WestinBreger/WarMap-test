@@ -1,6 +1,6 @@
 import { NEW_SELECTED, CHANGE_ROUND } from "../state/mutations"
 
-const validTile = /[abcdefghijklmn](\d|(1[01234]))$/i
+const validTile = /^[a-n](1[0-4]|[1-9])$/i
 
 const skipToTile = function(params, component) {
   if (params.has("tile")) {

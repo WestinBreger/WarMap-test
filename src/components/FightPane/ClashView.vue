@@ -6,7 +6,7 @@
           class="link"
           :fighterId="gbfighters(faction)[0]"
           :round="round"
-          :inputURL="fighters[0]"
+          :inputURL="link"
         />
       </div>
     </div>

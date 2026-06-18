@@ -1,4 +1,4 @@
-const imgrTest = /^(https?:\/\/)?imgur\.com\/.*\/.......$/im
+const imgrTest = /^(https?:\/\/)?imgur\.com\/.*\/[a-zA-Z0-9]+$/im
 const directCubariTest = /^(https:\/\/)?cubari\.moe\/.*/im
 const twitterTest = /^(https:\/\/)twitter\.com/im
 const tumblrTest = /^(https:\/\/).*\.tumblr\.com\/post\//im
@@ -12,7 +12,7 @@ const linkLabel = function(link) {
 }
 
 const cubariLink = function(link) {
-  const imgurIDPart = /\/(a|gallery)\/.......$/i
+  const imgurIDPart = /\/(a|gallery)\/([a-zA-Z0-9]+)$/i
   var parts = link.match(imgurIDPart)
 
   if (parts === null) {
@@ -22,7 +22,7 @@ const cubariLink = function(link) {
     return link
   }
 
-  var id = parts[0].split("/")[2]
+  var id = parts[2]
   return `https://cubari.moe/read/imgur/${id}/`
 }
 
