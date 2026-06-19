@@ -20,6 +20,9 @@
           </template>
         </vue-slider>
       </div>
+      <div class="control_group scoreboard-group" v-if="curRound !== 0">
+        <FactionScoreboard />
+      </div>
       <div class="control_group">
         <ToggleButton
           :value="true"
@@ -66,6 +69,7 @@ import VueSlider from "vue-slider-component"
 import "./elements/customerSlider.css"
 
 import { ToggleButton } from "vue-js-toggle-button"
+import FactionScoreboard from "./FactionScoreboard.vue"
 
 import {
   CURRENT_ZONE_FIGHT,
@@ -90,7 +94,8 @@ export default {
   },
   components: {
     ToggleButton,
-    VueSlider
+    VueSlider,
+    FactionScoreboard
   },
   methods: {
     setRound: function(value) {
@@ -180,6 +185,14 @@ h1 {
   margin-right: 1.4em;
   margin-left: 1em;
   width: 60%;
+}
+
+.scoreboard-group {
+  border-top: 1px solid rgba(189, 136, 58, 0.4);
+  border-bottom: 1px solid rgba(189, 136, 58, 0.4);
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin-bottom: 0.4em !important;
 }
 
 .control_bar_label {
