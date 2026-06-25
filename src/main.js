@@ -12,6 +12,8 @@ import "vue-toast-notification/dist/theme-sugar.css"
 
 import Vue2TouchEvents from "vue2-touch-events"
 
+import { ColorSchemeProvider } from "./context/ColorSchemeContext"
+
 Vue.config.productionTip = false
 
 Vue.use(Vuex)
@@ -26,6 +28,7 @@ const store = new Vuex.Store({
 })
 
 new Vue({
+  ...ColorSchemeProvider,
   render: h => h(App),
   router,
   store
